@@ -3,381 +3,433 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ليث أبو كرم | صيانة وبرمجة</title>
+  <title>ليث أبو كرم | صيانة وبرمجة وطلب شاشات</title>
   <style>
+    :root {
+      --bg: #0b1020;
+      --card: #121a30;
+      --card-2: #182340;
+      --text: #f3f6fc;
+      --muted: #9fb0d0;
+      --accent: #38bdf8;
+      --accent-2: #22c55e;
+      --border: rgba(255, 255, 255, 0.1);
+      --pink: #ec4899;
+      --red: #ef4444;
+      --amber: #f59e0b;
+    }
+
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+      background: radial-gradient(circle at top, #172554, var(--bg) 60%);
+      color: var(--text);
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      color: #f8fafc;
-      background: linear-gradient(-45deg, #090d16, #0f172a, #111827, #0c243c);
-      background-size: 400% 400%;
-      animation: bgMove 14s ease infinite;
       padding: 16px;
     }
 
-    @keyframes bgMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
     }
 
-    #intro {
-      position: fixed;
-      inset: 0;
-      z-index: 999;
-      background: #070b14;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+    .hero {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.14), rgba(18, 26, 48, 0.95));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
       text-align: center;
-      padding: 24px;
+      margin-bottom: 16px;
     }
 
-    #intro h2 {
-      font-size: 30px;
-      color: #38bdf8;
-      margin: 0 0 12px;
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: 1.6rem;
     }
 
-    #intro p {
-      color: #cbd5e1;
-      max-width: 420px;
-      margin: 0 0 22px;
+    .hero p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.95rem;
       line-height: 1.6;
     }
 
-    #intro button {
-      background: linear-gradient(135deg, #38bdf8, #0284c7);
-      color: #fff;
+    .btn {
       border: none;
-      padding: 13px 28px;
       border-radius: 12px;
-      font-size: 16px;
-      font-weight: bold;
+      padding: 11px 16px;
+      font-size: 0.95rem;
+      font-weight: 700;
       cursor: pointer;
+      color: #fff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.12s ease, opacity 0.15s ease;
     }
 
-    .app-card {
-      width: 100%;
-      max-width: 430px;
-      background: rgba(15, 23, 42, 0.92);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      border-radius: 22px;
-      padding: 20px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: var(--accent); color: #061326; }
+    .btn-wa { background: var(--accent-2); color: #052010; width: 100%; padding: 13px; font-size: 1rem; }
+    .btn-call { background: #334155; flex: 1; }
+    .btn-copy { background: #1e293b; border: 1px solid var(--border); flex: 1; }
 
-    .brand-title {
-      text-align: center;
-      font-size: 26px;
-      font-weight: bold;
-      margin: 0 0 14px;
-      color: #f8fafc;
-    }
-
-    #displayBox {
-      min-height: 190px;
-      max-height: 360px;
-      overflow-y: auto;
-      background: #0b1324;
-      border: 1.5px solid #38bdf8;
-      border-radius: 16px;
-      padding: 14px;
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
       margin-bottom: 16px;
-      line-height: 1.7;
     }
 
-    .welcome-msg {
-      text-align: center;
-      color: #e2e8f0;
-      padding: 36px 8px;
-      font-size: 15px;
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin: 0 0 12px;
     }
 
-    .btn-list {
+    .search-input, .field-input, .field-select {
+      width: 100%;
+      background: var(--card-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 11px 13px;
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .search-input:focus, .field-input:focus, .field-select:focus {
+      border-color: var(--accent);
+    }
+
+    .price-list {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
+      max-height: 290px;
+      overflow-y: auto;
+      margin-top: 10px;
+      padding-left: 4px;
     }
 
-    .menu-btn {
-      width: 100%;
-      padding: 13px 16px;
-      border: none;
-      border-radius: 12px;
-      font-size: 15px;
-      font-weight: bold;
-      color: #fff;
-      cursor: pointer;
-    }
-
-    .btn-screens { background: linear-gradient(135deg, #f472b6, #ec4899); }
-    .btn-order { background: linear-gradient(135deg, #f43f5e, #e11d48); }
-    .btn-maint { background: linear-gradient(135deg, #fbbf24, #d97706); color: #0f172a; }
-    .btn-soft { background: linear-gradient(135deg, #34d399, #059669); }
-    .btn-contact { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
-    .btn-welcome { background: linear-gradient(135deg, #38bdf8, #0284c7); }
-
-    .search-input, .form-input {
-      width: 100%;
-      padding: 10px 12px;
-      margin-bottom: 10px;
-      border-radius: 10px;
-      border: 1px solid #38bdf8;
-      background: #0f172a;
-      color: #f8fafc;
-      font-size: 14px;
-    }
-
-    .filter-row {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
-    }
-
-    .filter-chip {
-      padding: 6px 10px;
-      border-radius: 8px;
-      border: 1px solid #334155;
-      background: #1e293b;
-      color: #e2e8f0;
-      font-size: 12px;
-      cursor: pointer;
-    }
-
-    .filter-chip.active {
-      background: #38bdf8;
-      color: #090d16;
-      font-weight: bold;
-      border-color: #38bdf8;
-    }
-
-    .screen-item {
+    .price-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      background: #111c33;
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      border-radius: 10px;
-      padding: 9px 12px;
-      margin-bottom: 8px;
-      font-size: 14px;
+      background: var(--card-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 11px 14px;
+      cursor: pointer;
+      text-align: right;
+      width: 100%;
+      color: var(--text);
     }
 
-    .cost-badge {
+    .price-item.active {
+      border-color: var(--accent);
+      background: rgba(56, 189, 248, 0.14);
+    }
+
+    .price-tag {
       background: rgba(56, 189, 248, 0.16);
-      color: #38bdf8;
-      padding: 3px 9px;
-      border-radius: 8px;
-      font-weight: bold;
+      color: #7dd3fc;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.88rem;
       white-space: nowrap;
-      font-size: 13px;
     }
 
-    .submit-order-btn {
+    .quick-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .banner-btn {
       width: 100%;
       padding: 11px;
-      background: #22c55e;
-      color: #fff;
+      border-radius: 12px;
       border: none;
-      border-radius: 10px;
-      font-size: 15px;
-      font-weight: bold;
+      font-weight: 700;
+      color: #fff;
       cursor: pointer;
     }
 
-    .status-note {
-      margin-top: 8px;
-      font-size: 12px;
-      color: #fbbf24;
+    .b-pink { background: var(--pink); }
+    .b-red { background: var(--red); }
+    .b-amber { background: var(--amber); color: #1f1400; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 540px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    .field-group { margin-bottom: 11px; }
+    .field-group label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .chip {
+      background: var(--card-2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .chip:hover { color: var(--text); border-color: var(--accent); }
+
+    .note-box {
+      background: rgba(255, 255, 255, 0.04);
+      border-right: 3px solid var(--accent);
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .actions-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .toast {
       text-align: center;
+      font-size: 0.85rem;
+      color: #86efac;
+      min-height: 20px;
+      margin-top: 8px;
     }
   </style>
 </head>
 <body>
-  <div id="intro">
-    <h2>ليث أبو كرم</h2>
-    <p>منصة أسعار الشاشات، خدمات الصيانة والبرمجة، وطلب التوصيل المباشر.</p>
-    <button type="button" onclick="document.getElementById('intro').remove();">دخول إلى الواجهة</button>
-  </div>
+  <div class="container">
+    <section class="hero">
+      <h1>ليث أبو كرم</h1>
+      <p>منصة أسعار الشاشات، خدمات الصيانة والبرمجة، وطلب التوصيل المباشر.</p>
+      <button class="btn btn-primary" onclick="document.getElementById('orderForm').scrollIntoView({ behavior: 'smooth' })">
+        دخول إلى الواجهة
+      </button>
+    </section>
 
-  <div class="app-card">
-    <h1 class="brand-title">ليث أبو كرم</h1>
+    <section class="card">
+      <h2 class="section-title">قائمة الشاشات والأسعار (بحث سريع)</h2>
+      <input
+        id="searchInput"
+        class="search-input"
+        type="search"
+        placeholder="ابحث عن جهاز أو شاشة... مثال: Note 20، iPhone 11، Redmi"
+        oninput="renderList()"
+      />
+      <div id="priceList" class="price-list"></div>
 
-    <div id="displayBox">
-      <div class="welcome-msg">أهلاً بك! اختر القسم لعرض التفاصيل أو أسعار الشاشات.</div>
-    </div>
+      <div class="quick-actions">
+        <button class="banner-btn b-pink" onclick="selectCustom('أسعار شاشات الأجهزة كافة', 'حسب الموديل')">
+          أسعار شاشات الأجهزة كافة
+        </button>
+        <button class="banner-btn b-red" onclick="setServiceType('توصيل شاشة إلى العنوان')">
+          طلب شاشة وتوصيل
+        </button>
+        <button class="banner-btn b-amber" onclick="setServiceType('صيانة في المركز')">
+          صيانة الموبايلات
+        </button>
+      </div>
+    </section>
 
-    <div class="btn-list">
-      <button type="button" class="menu-btn btn-screens" onclick="window.openScreens()">أسعار شاشات الأجهزة كافة 📱</button>
-      <button type="button" class="menu-btn btn-order" onclick="window.openOrderForm()">طلب شاشة وتوصيل 🛵</button>
-      <button type="button" class="menu-btn btn-maint" onclick="window.openMaintenance()">صيانة الموبايلات</button>
-      <button type="button" class="menu-btn btn-soft" onclick="window.openSoftware()">البرمجة والأنظمة</button>
-      <button type="button" class="menu-btn btn-contact" onclick="window.openContact()">رقم الموبايل والتواصل</button>
-      <button type="button" class="menu-btn btn-welcome" onclick="window.showWelcome()">ترحيب</button>
-    </div>
+    <section id="orderForm" class="card">
+      <h2 class="section-title">إرسال طلب سريع عبر واتساب</h2>
+
+      <div class="note-box">
+        تتوفر خيارات شاشات متنوعة حسب الموديل والتوفر، ويتم فحص الجهاز والتأكد من عمل اللمس والألوان قبل التسليم.
+      </div>
+
+      <div class="field-group">
+        <label for="selectedItem">الجهاز / الخدمة المختارة</label>
+        <input id="selectedItem" class="field-input" type="text" value="Samsung Note 20 Ultra — 110,000 د.ع" />
+      </div>
+
+      <div class="grid-2">
+        <div class="field-group">
+          <label for="customerName">الاسم</label>
+          <input id="customerName" class="field-input" type="text" placeholder="اكتب اسمك" />
+        </div>
+        <div class="field-group">
+          <label for="customerPhone">رقم الهاتف</label>
+          <input id="customerPhone" class="field-input" type="tel" placeholder="07755996588" />
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="field-group">
+          <label for="serviceType">نوع الخدمة</label>
+          <select id="serviceType" class="field-select">
+            <option value="تبديل شاشة في المركز">تبديل شاشة في المركز</option>
+            <option value="توصيل شاشة إلى العنوان">توصيل شاشة إلى العنوان</option>
+            <option value="صيانة في المركز">صيانة في المركز</option>
+            <option value="برمجة وسوفت وير">برمجة وسوفت وير</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="deviceCondition">حالة الجهاز الحالية</label>
+          <input id="deviceCondition" class="field-input" type="text" placeholder="مثال: الشاشة مكسورة، اللمس شغال" />
+          <div class="chips">
+            <span class="chip" onclick="setCondition('الشاشة مكسورة')">الشاشة مكسورة</span>
+            <span class="chip" onclick="setCondition('اللمس متوقف')">اللمس متوقف</span>
+            <span class="chip" onclick="setCondition('تحتاج بطارية / فلات شحن')">بطارية / فلات شحن</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="customerAddress">المنطقة والشارع وأقرب نقطة دالة</label>
+        <input id="customerAddress" class="field-input" type="text" placeholder="مثال: البصرة - حي الأصدقاء - قرب..." />
+        <div class="chips">
+          <span class="chip" onclick="appendArea('حي الأصدقاء')">حي الأصدقاء</span>
+          <span class="chip" onclick="appendArea('العشار')">العشار</span>
+          <span class="chip" onclick="appendArea('الجنينة')">الجنينة</span>
+          <span class="chip" onclick="appendArea('القبلة')">القبلة</span>
+        </div>
+      </div>
+
+      <button class="btn btn-wa" onclick="sendWhatsApp()">إرسال الطلب عبر واتساب</button>
+
+      <div class="actions-row">
+        <button class="btn btn-copy" onclick="copyOrderSummary()">نسخ تفاصيل الطلب</button>
+        <a class="btn btn-call" href="tel:+9647755996588">اتصال مباشر</a>
+      </div>
+      <div id="toast" class="toast"></div>
+    </section>
   </div>
 
   <script>
-    window.MY_WHATSAPP_NUMBER = "9647755996588";
+    const WHATSAPP_NUMBER = "9647755996588"; // غيّر إلى رقمك الحقيقي بالصيغة الدولية
 
-    window.screensList = [
-      { brand: "Samsung", name: "Samsung A12 / A13", price: "20,000 د.ع" },
-      { brand: "Samsung", name: "Samsung M12", price: "22,000 د.ع" },
-      { brand: "Samsung", name: "Samsung A24 / A34", price: "45,000 د.ع" },
-      { brand: "Samsung", name: "Samsung Note 20 Ultra", price: "110,000 د.ع" },
-      { brand: "iPhone", name: "iPhone X / XS", price: "35,000 د.ع" },
-      { brand: "iPhone", name: "iPhone 11", price: "30,000 د.ع" },
-      { brand: "iPhone", name: "iPhone 12 / 12 Pro", price: "45,000 د.ع" },
-      { brand: "Redmi", name: "Redmi Note 11 / 12", price: "25,000 د.ع" },
-      { brand: "Redmi", name: "Redmi 12C / 13C", price: "20,000 د.ع" }
+    const items = [
+      { name: "Samsung Note 20 Ultra", price: "110,000 د.ع" },
+      { name: "iPhone X / XS", price: "35,000 د.ع" },
+      { name: "iPhone 11", price: "30,000 د.ع" },
+      { name: "iPhone 12 / 12 Pro", price: "45,000 د.ع" },
+      { name: "Redmi Note 11 / 12", price: "25,000 د.ع" },
+      { name: "Redmi 12C / 13C", price: "20,000 د.ع" }
     ];
 
-    window.currentBrand = "الكل";
+    let activeIndex = 0;
 
-    window.showWelcome = function () {
-      document.getElementById("displayBox").innerHTML =
-        '<div class="welcome-msg">أهلاً بك! اختر القسم لعرض التفاصيل أو أسعار الشاشات.</div>';
-    };
+    function renderList() {
+      const q = document.getElementById("searchInput").value.trim().toLowerCase();
+      const listEl = document.getElementById("priceList");
+      listEl.innerHTML = "";
 
-    window.openScreens = function () {
-      window.currentBrand = "الكل";
-      document.getElementById("displayBox").innerHTML = `
-        <input id="screenSearch" class="search-input" type="text" placeholder="ابحث عن موديل الجهاز أو الشاشة..." oninput="window.renderScreens()" />
-        <div class="filter-row" id="brandFilters">
-          <button type="button" class="filter-chip active" onclick="window.selectBrand('الكل', this)">الكل</button>
-          <button type="button" class="filter-chip" onclick="window.selectBrand('Samsung', this)">Samsung</button>
-          <button type="button" class="filter-chip" onclick="window.selectBrand('iPhone', this)">iPhone</button>
-          <button type="button" class="filter-chip" onclick="window.selectBrand('Redmi', this)">Redmi</button>
-        </div>
-        <div id="screensResults"></div>
-      `;
-      window.renderScreens();
-    };
-
-    window.selectBrand = function (brand, btnEl) {
-      window.currentBrand = brand;
-      document.querySelectorAll(".filter-chip").forEach((chip) => chip.classList.remove("active"));
-      if (btnEl) btnEl.classList.add("active");
-      window.renderScreens();
-    };
-
-    window.renderScreens = function () {
-      const inputEl = document.getElementById("screenSearch");
-      const resultsEl = document.getElementById("screensResults");
-      if (!resultsEl) return;
-
-      const query = inputEl ? inputEl.value.trim().toLowerCase() : "";
-      const filtered = window.screensList.filter((item) => {
-        const matchBrand = window.currentBrand === "الكل" || item.brand === window.currentBrand;
-        const matchQuery =
-          !query ||
-          item.name.toLowerCase().includes(query) ||
-          item.brand.toLowerCase().includes(query) ||
-          item.price.toLowerCase().includes(query);
-        return matchBrand && matchQuery;
-      });
+      const filtered = items.filter(
+        (item) => item.name.toLowerCase().includes(q) || item.price.toLowerCase().includes(q)
+      );
 
       if (!filtered.length) {
-        resultsEl.innerHTML = '<div class="welcome-msg">لا توجد نتائج مطابقة للبحث.</div>';
+        listEl.innerHTML = `<div style="color: var(--muted); padding: 10px;">لم يتم العثور على مطابقة، يمكنك كتابة الموديل مباشرة في خانة الطلب.</div>`;
         return;
       }
 
-      resultsEl.innerHTML = filtered
-        .map(
-          (item) => `
-          <div class="screen-item">
-            <span>${item.name}</span>
-            <span class="cost-badge">${item.price}</span>
-          </div>
-        `
-        )
-        .join("");
-    };
+      filtered.forEach((item) => {
+        const realIdx = items.indexOf(item);
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `price-item ${realIdx === activeIndex ? "active" : ""}`;
+        btn.innerHTML = `<span>${item.name}</span><span class="price-tag">${item.price}</span>`;
+        btn.onclick = () => {
+          activeIndex = realIdx;
+          document.getElementById("selectedItem").value = `${item.name} — ${item.price}`;
+          renderList();
+        };
+        listEl.appendChild(btn);
+      });
+    }
 
-    window.openMaintenance = function () {
-      document.getElementById("displayBox").innerHTML = `
-        <h3 style="margin:0 0 8px;color:#fbbf24;">قسم صيانة الموبايلات</h3>
-        <p style="margin:0;color:#e2e8f0;">
-          • تبديل شاشات بمختلف الجودات.<br/>
-          • تبديل بطاريات وقواعد شحن.<br/>
-          • فحص وتنظيف البوردات ومعالجة أعطال التشغيل.
-        </p>
-      `;
-    };
+    function selectCustom(label, priceText) {
+      activeIndex = -1;
+      document.getElementById("selectedItem").value = `${label} (${priceText})`;
+      renderList();
+      document.getElementById("orderForm").scrollIntoView({ behavior: "smooth" });
+    }
 
-    window.openSoftware = function () {
-      document.getElementById("displayBox").innerHTML = `
-        <h3 style="margin:0 0 8px;color:#34d399;">قسم البرمجة والأنظمة</h3>
-        <p style="margin:0;color:#e2e8f0;">
-          • تفليش وتحديث أنظمة الهواتف.<br/>
-          • حل مشاكل التعليق وإعادة ضبط المصنع.<br/>
-          • إعداد الأنظمة والبرامج للأجهزة.
-        </p>
-      `;
-    };
+    function setServiceType(val) {
+      document.getElementById("serviceType").value = val;
+      document.getElementById("orderForm").scrollIntoView({ behavior: "smooth" });
+    }
 
-    window.openContact = function () {
-      document.getElementById("displayBox").innerHTML = `
-        <h3 style="margin:0 0 8px;color:#a78bfa;">رقم الموبايل والتواصل</h3>
-        <p style="margin:0;color:#e2e8f0;">
-          رقم الموبايل: <strong>07755996588</strong><br/>
-          للطلب والاستفسار المباشر استخدم زر <strong>طلب شاشة وتوصيل</strong>.
-        </p>
-      `;
-    };
+    function setCondition(val) {
+      document.getElementById("deviceCondition").value = val;
+    }
 
-    window.openOrderForm = function (prefilledScreen) {
-      const box = document.getElementById("displayBox");
-      box.innerHTML = `
-        <div>
-          <h3 style="margin:0 0 10px;color:#38bdf8;text-align:center;">طلب شاشة وتوصيل 🛵</h3>
-          <input id="custName" class="form-input" type="text" placeholder="الاسم الكامل" />
-          <input id="screenModel" class="form-input" type="text" placeholder="نوع الجهاز / الشاشة المطلوبة" value="${prefilledScreen || ""}" />
-          <input id="custPhone" class="form-input" type="tel" placeholder="رقم الموبايل" />
-          <input id="custAddress" class="form-input" type="text" placeholder="العنوان بالتفصيل (المنطقة / أقرب نقطة دالة)" />
-          <button type="button" class="submit-order-btn" onclick="window.sendOrderWhatsApp()">إرسال الطلب عبر واتساب ✅</button>
-          <div id="orderStatus" class="status-note"></div>
-        </div>
-      `;
-    };
-
-    window.sendOrderWhatsApp = function () {
-      const name = document.getElementById("custName").value.trim();
-      const screen = document.getElementById("screenModel").value.trim();
-      const phone = document.getElementById("custPhone").value.trim();
-      const address = document.getElementById("custAddress").value.trim();
-      const statusEl = document.getElementById("orderStatus");
-
-      if (!name || !screen || !phone || !address) {
-        if (statusEl) statusEl.textContent = "يرجى ملء الاسم، نوع الشاشة، رقم الموبايل، والعنوان.";
-        return;
+    function appendArea(area) {
+      const addrEl = document.getElementById("customerAddress");
+      if (!addrEl.value.includes(area)) {
+        addrEl.value = addrEl.value ? `${area} - ${addrEl.value}` : area;
       }
+    }
 
-      const cleanPhone = String(window.MY_WHATSAPP_NUMBER).replace(/\D/g, "");
-      const message =
-        "مرحباً ليث أبو كرم، أرغب بطلب شاشة:\n" +
-        "الاسم: " + name + "\n" +
-        "الشاشة المطلوبة: " + screen + "\n" +
-        "رقم الموبايل: " + phone + "\n" +
-        "العنوان: " + address;
+    function buildMessage() {
+      const name = document.getElementById("customerName").value.trim() || "غير مذكور";
+      const phone = document.getElementById("customerPhone").value.trim() || "غير مذكور";
+      const item = document.getElementById("selectedItem").value.trim() || "غير محدد";
+      const service = document.getElementById("serviceType").value;
+      const condition = document.getElementById("deviceCondition").value.trim() || "غير مذكورة";
+      const address = document.getElementById("customerAddress").value.trim() || "غير مذكور";
 
-      const url = "https://wa.me/" + cleanPhone + "?text=" + encodeURIComponent(message);
-      window.location.href = url;;
-      if (statusEl) {
-        statusEl.style.color = "#4ade80";
-        statusEl.textContent = "تم تجهيز الطلب وفتح واتساب للإرسال.";
-      }
-    };
+      return [
+        "طلب جديد — ليث أبو كرم",
+        "------------------------",
+        `الاسم: ${name}`,
+        `الجهاز / السعر: ${item}`,
+        `نوع الخدمة: ${service}`,
+        `حالة الجهاز: ${condition}`,
+        `العنوان: ${address}`,
+        `رقم الهاتف: ${phone}`
+      ].join("\n");
+    }
+
+    function sendWhatsApp() {
+      const text = encodeURIComponent(buildMessage());
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank");
+    }
+
+    function copyOrderSummary() {
+      const summary = buildMessage();
+      navigator.clipboard?.writeText(summary).then(() => {
+        const toast = document.getElementById("toast");
+        toast.textContent = "تم نسخ تفاصيل الطلب بنجاح.";
+        setTimeout(() => (toast.textContent = ""), 2500);
+      });
+    }
+
+    renderList();
   </script>
 </body>
 </html>
